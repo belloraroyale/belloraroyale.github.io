@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "category": "parfums",
+      "name": "Scentlab",
+      "image": "images/ea9fd369-9d33-4898-9025-4b4a648eddbe.jpeg",
+      "price": 7000,
+      "oldPrice": 8000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "#Élégance et senteurs d’exception\n#Parfums de marque disponibles à Dakar 🇸🇳\n#Livraison nationale • Expédition rapide",
+      "colors": [
+        "#0161fd"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 2,
+      "category": "chaussures",
+      "name": "Sandal Dior, Versace",
+      "image": "images/dacf2b78-2c7b-4b56-b0db-3ce18f5a43b5.jpeg",
+      "price": 17000,
+      "oldPrice": 19000,
+      "isNew": false,
+      "isPromo": false,
+      "description": "Sandal Dior, Versace \nSize: 40 à 46",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    }
+  ]
+}

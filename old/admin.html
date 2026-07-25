@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bellora Royale — Administration</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & ROOT ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F0D060;
+      --black: #080808;
+      --black-2: #111111;
+      --black-3: #1A1A1A;
+      --black-4: #242424;
+      --white: #FAFAFA;
+      --gray: #888;
+      --gray-light: #bbb;
+      --green: #27ae60;
+      --red: #e74c3c;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --radius: 3px;
+      --transition: 0.3s ease;
+    }
+    html { font-size: 16px; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--gold); text-decoration: none; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.3); }
+
+    /* ===== HEADER ===== */
+    .admin-header {
+      background: var(--black-2);
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; position: sticky; top: 0; z-index: 50;
+    }
+    .admin-logo {
+      font-family: var(--font-display);
+      font-size: 1.2rem; color: var(--white);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .admin-logo span { color: var(--gold); }
+    .admin-badge {
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.25);
+      color: var(--gold); font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+    }
+    .header-link {
+      font-size: 0.78rem; color: var(--gray-light);
+      display: flex; align-items: center; gap: 6px;
+      transition: color var(--transition);
+    }
+    .header-link:hover { color: var(--gold); }
+
+    /* ===== LAYOUT ===== */
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* ===== SIDEBAR CONFIG ===== */
+    .sidebar {
+      background: var(--black-2);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 24px;
+      position: sticky; top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+    .sidebar-title {
+      font-size: 0.65rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+    }
+    .config-group { margin-bottom: 20px; }
+    .config-label {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gray);
+      margin-bottom: 8px; display: block;
+    }
+    .config-input {
+      width: 100%; background: var(--black-3);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(212,175,55,0.3);
+      color: var(--white); padding: 10px 14px;
+      font-family: var(--font-body); font-size: 0.85rem;
+      outline: none; transition: border-color var(--transition);
+    }
+    .config-input:focus { border-bottom-color: var(--gold); }
+    .config-input::placeholder { color: var(--gray); font-size: 0.8rem; }
+    .config-input[type="password"] { letter-spacing: 0.1em; }
+
+    .config-help {
+      font-size: 0.72rem; color: var(--gray);
+      margin-top: 6px; line-height: 1.5;
+    }
+    .config-help a { color: var(--gold); font-size: 0.72rem; }
+
+    .btn-save-config {
+      width: 100%; padding: 11px;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.3);
+      color: var(--gold); font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; cursor: pointer;
+      transition: var(--transition); margin-top: 8px;
+    }
+    .btn-save-config:hover { background: rgba(212,175,55,0.2); }
+
+    .config-status {
+      font-size: 0.72rem; margin-top: 10px;
+      padding: 8px 12px; border-radius: var(--radius);
+      display: none;
+    }
+    .config-status.ok { background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.3); color: var(--green); display: block; }
+    .config-status.err { background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3); color: var(--red); display: block; }
+
+    /* Stats sidebar */
+    .stats-box {
+      margin-top: 28px; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.82rem;
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label { color: var(--gray-light); }
+    .stat-value { color: var(--gold); font-weight: 600; }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content { padding: 32px 40px; overflow-y: auto; }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem; font-weight: 500;
+      margin-bottom: 6px; color: var(--white);
+    }
+    .page-title em { font-style: italic; color: var(--gold); }
+    .page-subtitle { font-size: 0.85rem; color: var(--gray); margin-bottom: 32px; }
+
+    /* ===== FORM ===== */
+    .form-card {
+      background: var(--black-3);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    .form-section-title {
+      font-size: 0.65rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gray);
+    }
+    .form-label span { color: var(--red); margin-left: 2px; }
+    .form-control {
+      background: var(--black-4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(212,175,55,0.25);
+      color: var(--white); padding: 11px 14px;
+      font-family: var(--font-body); font-size: 0.88rem;
+      outline: none; transition: border-color var(--transition);
+      width: 100%;
+    }
+    .form-control:focus { border-bottom-color: var(--gold); }
+    .form-control::placeholder { color: var(--gray); }
+    select.form-control option { background: var(--black-3); }
+    textarea.form-control { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+    /* Toggle switches */
+    .toggle-group { display: flex; gap: 20px; flex-wrap: wrap; }
+    .toggle-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .toggle-item input[type="checkbox"] { display: none; }
+    .toggle-track {
+      width: 40px; height: 22px; background: var(--black-4);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 11px; position: relative;
+      transition: background var(--transition);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .toggle-track::after {
+      content: ''; position: absolute;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--gray); top: 2px; left: 2px;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .toggle-item input:checked + .toggle-track { background: rgba(212,175,55,0.2); border-color: var(--gold); }
+    .toggle-item input:checked + .toggle-track::after { transform: translateX(18px); background: var(--gold); }
+    .toggle-label { font-size: 0.85rem; color: var(--gray-light); }
+
+    /* Colors dynamic */
+    .colors-editor { display: flex; flex-direction: column; gap: 10px; }
+    .color-entry {
+      display: flex; gap: 10px; align-items: center;
+    }
+    .color-entry input[type="color"] {
+      width: 40px; height: 38px; padding: 2px; cursor: pointer;
+      background: var(--black-4); border: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+    .color-entry .form-control { flex: 1; }
+    .btn-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: transparent; border: 1px solid rgba(255,255,255,0.1);
+      color: var(--gray); cursor: pointer; font-size: 1rem;
+      transition: var(--transition); display: flex;
+      align-items: center; justify-content: center;
+    }
+    .btn-icon:hover { border-color: var(--red); color: var(--red); }
+    .btn-icon.add:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-add-row {
+      background: transparent; border: 1px dashed rgba(212,175,55,0.3);
+      color: var(--gold); padding: 8px 16px; font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: var(--transition); width: 100%;
+    }
+    .btn-add-row:hover { background: rgba(212,175,55,0.06); }
+
+    /* Sizes chips */
+    .sizes-editor { display: flex; flex-direction: column; gap: 10px; }
+    .sizes-input-row { display: flex; gap: 8px; }
+    .sizes-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .size-chip {
+      background: var(--black-4); border: 1px solid rgba(212,175,55,0.2);
+      color: var(--gold); padding: 5px 12px; font-size: 0.78rem;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .size-chip button {
+      background: none; border: none; color: var(--gray);
+      cursor: pointer; font-size: 0.8rem; line-height: 1;
+      transition: color var(--transition); padding: 0;
+    }
+    .size-chip button:hover { color: var(--red); }
+
+    /* Image upload zone */
+    .upload-zone {
+      border: 2px dashed rgba(212,175,55,0.25);
+      background: var(--black-4);
+      padding: 32px 20px; text-align: center;
+      cursor: pointer; transition: var(--transition);
+      position: relative;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.04);
+    }
+    .upload-zone input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .upload-icon { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.5; }
+    .upload-text { font-size: 0.85rem; color: var(--gray-light); }
+    .upload-text strong { color: var(--gold); }
+    .upload-hint { font-size: 0.72rem; color: var(--gray); margin-top: 4px; }
+
+    .image-preview {
+      margin-top: 16px; display: none;
+      position: relative; display: none;
+    }
+    .image-preview img {
+      width: 100%; max-height: 220px;
+      object-fit: cover; border: 1px solid rgba(212,175,55,0.15);
+    }
+    .preview-name {
+      font-size: 0.72rem; color: var(--gray);
+      margin-top: 6px; text-align: center;
+    }
+    .btn-remove-img {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 0.8rem; transition: var(--transition);
+    }
+    .btn-remove-img:hover { border-color: var(--red); color: var(--red); }
+
+    /* ===== SUBMIT BUTTON ===== */
+    .form-actions {
+      display: flex; gap: 12px; align-items: center;
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 8px;
+    }
+    .btn-submit {
+      padding: 14px 40px; background: var(--gold); color: var(--black);
+      border: none; font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      cursor: pointer; transition: var(--transition);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-reset {
+      padding: 14px 24px; background: transparent;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--gray-light); font-size: 0.78rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: var(--transition);
+    }
+    .btn-reset:hover { border-color: var(--gray-light); color: var(--white); }
+
+    /* ===== PROGRESS ===== */
+    .progress-wrap {
+      display: none; flex-direction: column; gap: 8px;
+      margin-top: 16px;
+    }
+    .progress-step {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.82rem; color: var(--gray);
+    }
+    .progress-step .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--black-4); border: 1px solid var(--gray);
+      flex-shrink: 0; transition: var(--transition);
+    }
+    .progress-step.active .dot { background: var(--gold); border-color: var(--gold); animation: pulse 1s infinite; }
+    .progress-step.active { color: var(--white); }
+    .progress-step.done .dot { background: var(--green); border-color: var(--green); animation: none; }
+    .progress-step.done { color: var(--green); }
+    .progress-step.error .dot { background: var(--red); border-color: var(--red); animation: none; }
+    .progress-step.error { color: var(--red); }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--black-3); border: 1px solid rgba(212,175,55,0.3);
+      color: var(--white); padding: 14px 24px;
+      font-size: 0.85rem; z-index: 999;
+      opacity: 0; transform: translateY(12px);
+      transition: all 0.35s ease; pointer-events: none;
+      max-width: 360px; line-height: 1.5;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { border-color: rgba(39,174,96,0.4); }
+    .toast.error { border-color: rgba(231,76,60,0.4); }
+
+    /* ===== PRODUCTS LIST ===== */
+    .products-list-card {
+      background: var(--black-3);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 32px;
+    }
+    .list-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .list-header h3 {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 500;
+    }
+    .product-count {
+      background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2);
+      color: var(--gold); font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; letter-spacing: 0.1em;
+    }
+    .products-table { width: 100%; border-collapse: collapse; }
+    .products-table th {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gray); padding: 10px 12px; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .products-table td {
+      padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.82rem; vertical-align: middle;
+    }
+    .products-table tr:last-child td { border-bottom: none; }
+    .products-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .td-img { width: 48px; height: 48px; object-fit: cover; }
+    .td-name { font-weight: 500; color: var(--white); }
+    .td-cat {
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); background: rgba(212,175,55,0.08);
+      padding: 3px 8px; display: inline-block;
+    }
+    .td-price { color: var(--gold); font-weight: 600; }
+    .badge-new { background: rgba(212,175,55,0.15); color: var(--gold); font-size: 0.6rem; padding: 2px 8px; letter-spacing: 0.1em; }
+    .badge-promo { background: rgba(231,76,60,0.15); color: var(--red); font-size: 0.6rem; padding: 2px 8px; letter-spacing: 0.1em; }
+    .btn-delete {
+      background: transparent; border: 1px solid rgba(231,76,60,0.25);
+      color: var(--red); padding: 5px 12px; font-size: 0.7rem;
+      cursor: pointer; transition: var(--transition); letter-spacing: 0.05em;
+    }
+    .btn-delete:hover { background: rgba(231,76,60,0.1); border-color: var(--red); }
+    .empty-list { text-align: center; padding: 40px; color: var(--gray); font-size: 0.9rem; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .admin-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .main-content { padding: 24px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+    }
+    @media (max-width: 600px) {
+      .admin-header { padding: 0 16px; }
+      .admin-badge { display: none; }
+      .products-table th:nth-child(3),
+      .products-table td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="admin-header">
+  <div class="admin-logo">
+    <span>✦</span> Bellora Royale
+    <div class="admin-badge">Administration</div>
+  </div>
+  <a href="bellora-royale.html" class="header-link">
+    ← Voir le site
+  </a>
+</header>
+
+<!-- ===== LAYOUT ===== -->
+<div class="admin-layout">
+
+  <!-- ===== SIDEBAR CONFIG ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-title">⚙ Configuration GitHub</div>
+
+    <div class="config-group">
+      <label class="config-label">Nom d'utilisateur GitHub</label>
+      <input type="text" class="config-input" id="gh-owner" placeholder="ex: monjohnbellora" />
+    </div>
+
+    <div class="config-group">
+      <label class="config-label">Nom du repository</label>
+      <input type="text" class="config-input" id="gh-repo" placeholder="ex: bellora-royale" />
+    </div>
+
+    <div class="config-group">
+      <label class="config-label">Branche</label>
+      <input type="text" class="config-input" id="gh-branch" placeholder="main" value="main" />
+    </div>
+
+    <div class="config-group">
+      <label class="config-label">Personal Access Token</label>
+<<<<<<< HEAD
+      <input type="password" class="config-input" id="gh-token" placeholder="" />
+=======
+      <input type="password" class="config-input" id="gh-token" placeholder="ghp_xxxxxxxxxxxx" />
+>>>>>>> ef7d9e6e6d6068bb2be0d8c7460380649d84ca09
+      <p class="config-help">
+        Générez un token sur <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens</a>
+        avec les permissions <strong>repo</strong> cochées.
+      </p>
+    </div>
+
+    <button class="btn-save-config" onclick="saveConfig()">Enregistrer la configuration</button>
+    <div class="config-status" id="config-status"></div>
+
+    <!-- Stats -->
+    <div class="stats-box" id="stats-box" style="display:none;">
+      <div class="sidebar-title" style="margin-top:0;">📊 Statistiques</div>
+      <div class="stat-row"><span class="stat-label">Total produits</span><span class="stat-value" id="stat-total">—</span></div>
+      <div class="stat-row"><span class="stat-label">Chaussures</span><span class="stat-value" id="stat-shoes">—</span></div>
+      <div class="stat-row"><span class="stat-label">Vêtements</span><span class="stat-value" id="stat-clothes">—</span></div>
+      <div class="stat-row"><span class="stat-label">Parfums</span><span class="stat-value" id="stat-perfume">—</span></div>
+      <div class="stat-row"><span class="stat-label">En promotion</span><span class="stat-value" id="stat-promo">—</span></div>
+      <div class="stat-row"><span class="stat-label">Nouveautés</span><span class="stat-value" id="stat-new">—</span></div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+    <h1 class="page-title">Ajouter un <em>produit</em></h1>
+    <p class="page-subtitle">Remplissez le formulaire ci-dessous. Le produit sera ajouté dans <code>products.json</code> et l'image uploadée dans <code>images/</code> via l'API GitHub.</p>
+
+    <!-- FORM -->
+    <div class="form-card">
+
+      <!-- Informations générales -->
+      <div class="form-section-title">① Informations générales</div>
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label class="form-label">Nom du produit <span>*</span></label>
+          <input type="text" class="form-control" id="p-name" placeholder="ex: Escarpins Dorés Élite" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Catégorie <span>*</span></label>
+          <select class="form-control" id="p-category">
+            <option value="chaussures">👠 Chaussures</option>
+            <option value="vetements">👔 Vêtements</option>
+            <option value="parfums">🧴 Parfums</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Prix (FCFA) <span>*</span></label>
+          <input type="number" class="form-control" id="p-price" placeholder="85000" min="0" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ancien prix (FCFA) <small style="color:var(--gray)">— optionnel</small></label>
+          <input type="number" class="form-control" id="p-old-price" placeholder="110000 (laisser vide si aucun)" min="0" />
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Description <span>*</span></label>
+          <textarea class="form-control" id="p-description" placeholder="Décrivez le produit : matière, coupe, caractéristiques..."></textarea>
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Statut du produit</label>
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <input type="checkbox" id="p-is-new" />
+              <div class="toggle-track"></div>
+              <span class="toggle-label">✦ Nouveauté</span>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" id="p-is-promo" />
+              <div class="toggle-track"></div>
+              <span class="toggle-label">🏷 En promotion</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Image -->
+      <div class="form-section-title" style="margin-top:28px;">② Image du produit</div>
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="p-image" accept="image/jpeg,image/png,image/webp" />
+        <div class="upload-icon">🖼</div>
+        <div class="upload-text">
+          <strong>Cliquez pour choisir une image</strong> ou glissez-la ici
+        </div>
+        <div class="upload-hint">JPEG, PNG ou WebP — max 5 Mo</div>
+      </div>
+      <div class="image-preview" id="image-preview">
+        <img id="preview-img" src="" alt="Aperçu" />
+        <button class="btn-remove-img" onclick="removeImage()" title="Supprimer l'image">✕</button>
+        <p class="preview-name" id="preview-name"></p>
+      </div>
+
+      <!-- Couleurs -->
+      <div class="form-section-title" style="margin-top:28px;">③ Couleurs disponibles</div>
+      <div class="colors-editor" id="colors-editor">
+        <div class="color-entry">
+          <input type="color" value="#1a1a1a" />
+          <input type="text" class="form-control" placeholder="Nom : ex. Noir" value="Noir" />
+          <button class="btn-icon" onclick="removeColorRow(this)" title="Supprimer">✕</button>
+        </div>
+      </div>
+      <button class="btn-add-row" style="margin-top:10px;" onclick="addColorRow()">+ Ajouter une couleur</button>
+
+      <!-- Tailles -->
+      <div class="form-section-title" style="margin-top:28px;">④ Tailles disponibles</div>
+      <div class="sizes-editor">
+        <div class="sizes-input-row">
+          <input type="text" class="form-control" id="size-input" placeholder="ex: 40, M, 100ml — appuyez Entrée" style="flex:1;" />
+          <button class="btn-icon add" onclick="addSize()" title="Ajouter">+</button>
+        </div>
+        <div class="sizes-chips" id="sizes-chips"></div>
+        <p style="font-size:0.72rem;color:var(--gray);">Laissez vide si non applicable (ex. parfums en format unique).</p>
+      </div>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <button class="btn-submit" id="btn-submit" onclick="submitProduct()">
+          <span id="btn-text">✦ Publier le produit</span>
+        </button>
+        <button class="btn-reset" onclick="resetForm()">Réinitialiser</button>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap" id="progress-wrap">
+        <div class="progress-step" id="step-image"><div class="dot"></div> Upload de l'image dans <code>images/</code></div>
+        <div class="progress-step" id="step-json"><div class="dot"></div> Mise à jour de <code>products.json</code></div>
+        <div class="progress-step" id="step-done"><div class="dot"></div> Produit publié avec succès</div>
+      </div>
+
+    </div>
+
+    <!-- PRODUCTS LIST -->
+    <div class="products-list-card">
+      <div class="list-header">
+        <h3>Produits existants</h3>
+        <span class="product-count" id="product-count">Chargement…</span>
+      </div>
+      <div id="products-list-body">
+        <div class="empty-list">Configurez GitHub pour charger les produits.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+// ===== CONFIG =====
+let CONFIG = { owner: '', repo: '', branch: 'main', token: '' };
+let PRODUCTS_DATA = [];
+let selectedImageFile = null;
+let selectedImageName = null;
+
+// ===== INIT =====
+$(document).ready(function () {
+  loadConfig();
+  bindImageUpload();
+  bindSizeEnter();
+
+  // Drag & drop
+  const zone = document.getElementById('upload-zone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) handleImageFile(file);
+  });
+});
+
+// ===== CONFIG =====
+function loadConfig() {
+  const saved = localStorage.getItem('bellora_gh_config');
+  if (saved) {
+    CONFIG = JSON.parse(saved);
+    $('#gh-owner').val(CONFIG.owner);
+    $('#gh-repo').val(CONFIG.repo);
+    $('#gh-branch').val(CONFIG.branch);
+    $('#gh-token').val(CONFIG.token);
+    if (CONFIG.owner && CONFIG.repo && CONFIG.token) {
+      verifyAndLoadProducts();
+    }
+  }
+}
+
+function saveConfig() {
+  CONFIG.owner  = $('#gh-owner').val().trim();
+  CONFIG.repo   = $('#gh-repo').val().trim();
+  CONFIG.branch = $('#gh-branch').val().trim() || 'main';
+  CONFIG.token  = $('#gh-token').val().trim();
+
+  if (!CONFIG.owner || !CONFIG.repo || !CONFIG.token) {
+    showConfigStatus('Veuillez remplir tous les champs obligatoires.', 'err');
+    return;
+  }
+
+  localStorage.setItem('bellora_gh_config', JSON.stringify(CONFIG));
+  verifyAndLoadProducts();
+}
+
+function verifyAndLoadProducts() {
+  showConfigStatus('Connexion à GitHub…', '');
+  $.ajax({
+    url: `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}`,
+    headers: { Authorization: `token ${CONFIG.token}` },
+    success: function () {
+      showConfigStatus('✓ Connecté au repository avec succès.', 'ok');
+      loadProductsFromGitHub();
+    },
+    error: function (xhr) {
+      const msg = xhr.status === 401 ? 'Token invalide ou expiré.' :
+                  xhr.status === 404 ? 'Repository introuvable. Vérifiez le nom.' :
+                  `Erreur ${xhr.status}`;
+      showConfigStatus(`✕ ${msg}`, 'err');
+    }
+  });
+}
+
+function showConfigStatus(msg, type) {
+  const el = $('#config-status');
+  el.text(msg).removeClass('ok err').addClass(type).show();
+}
+
+// ===== LOAD PRODUCTS FROM GITHUB =====
+function loadProductsFromGitHub() {
+  $.ajax({
+    url: `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/products.json?ref=${CONFIG.branch}`,
+    headers: { Authorization: `token ${CONFIG.token}` },
+    success: function (data) {
+      const content = atob(data.content.replace(/\n/g, ''));
+      PRODUCTS_DATA = JSON.parse(content).products || [];
+      renderProductsList();
+      updateStats();
+    },
+    error: function () {
+      showToast('Impossible de charger products.json depuis GitHub.', 'error');
+    }
+  });
+}
+
+// ===== RENDER PRODUCTS LIST =====
+function renderProductsList() {
+  $('#product-count').text(`${PRODUCTS_DATA.length} produit${PRODUCTS_DATA.length > 1 ? 's' : ''}`);
+
+  if (PRODUCTS_DATA.length === 0) {
+    $('#products-list-body').html('<div class="empty-list">Aucun produit dans la base.</div>');
+    return;
+  }
+
+  const rows = PRODUCTS_DATA.map(p => `
+    <tr>
+      <td><img class="td-img" src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\'/>'" /></td>
+      <td class="td-name">${p.name}</td>
+      <td><span class="td-cat">${p.category}</span></td>
+      <td class="td-price">${p.price.toLocaleString('fr-FR')} FCFA</td>
+      <td>
+        ${p.isNew ? '<span class="badge-new">Nouveau</span> ' : ''}
+        ${p.isPromo ? '<span class="badge-promo">Promo</span>' : ''}
+      </td>
+      <td><button class="btn-delete" onclick="deleteProduct(${p.id})">Supprimer</button></td>
+    </tr>
+  `).join('');
+
+  $('#products-list-body').html(`
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>Image</th><th>Nom</th><th>Catégorie</th>
+          <th>Prix</th><th>Statut</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `);
+}
+
+function updateStats() {
+  $('#stats-box').show();
+  $('#stat-total').text(PRODUCTS_DATA.length);
+  $('#stat-shoes').text(PRODUCTS_DATA.filter(p => p.category === 'chaussures').length);
+  $('#stat-clothes').text(PRODUCTS_DATA.filter(p => p.category === 'vetements').length);
+  $('#stat-perfume').text(PRODUCTS_DATA.filter(p => p.category === 'parfums').length);
+  $('#stat-promo').text(PRODUCTS_DATA.filter(p => p.isPromo).length);
+  $('#stat-new').text(PRODUCTS_DATA.filter(p => p.isNew).length);
+}
+
+// ===== IMAGE HANDLING =====
+function bindImageUpload() {
+  $('#p-image').on('change', function () {
+    if (this.files[0]) handleImageFile(this.files[0]);
+  });
+}
+
+function handleImageFile(file) {
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('Image trop volumineuse (max 5 Mo).', 'error');
+    return;
+  }
+  selectedImageFile = file;
+  // Sanitize filename
+  selectedImageName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').toLowerCase();
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    $('#preview-img').attr('src', e.target.result);
+    $('#preview-name').text(selectedImageName);
+    $('#image-preview').show();
+    $('#upload-zone').hide();
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeImage() {
+  selectedImageFile = null;
+  selectedImageName = null;
+  $('#p-image').val('');
+  $('#image-preview').hide();
+  $('#upload-zone').show();
+}
+
+// ===== COLORS =====
+function addColorRow(hex = '#D4AF37', name = '') {
+  const row = $(`
+    <div class="color-entry">
+      <input type="color" value="${hex}" />
+      <input type="text" class="form-control" placeholder="Nom : ex. Or" value="${name}" />
+      <button class="btn-icon" onclick="removeColorRow(this)" title="Supprimer">✕</button>
+    </div>
+  `);
+  $('#colors-editor').append(row);
+}
+
+function removeColorRow(btn) {
+  const entries = $('#colors-editor .color-entry');
+  if (entries.length <= 1) {
+    showToast('Au moins une couleur est requise.', 'error');
+    return;
+  }
+  $(btn).closest('.color-entry').remove();
+}
+
+// ===== SIZES =====
+function bindSizeEnter() {
+  $('#size-input').on('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); addSize(); }
+  });
+}
+
+function addSize() {
+  const val = $('#size-input').val().trim();
+  if (!val) return;
+  // Handle comma-separated
+  val.split(',').forEach(s => {
+    const size = s.trim();
+    if (size) addSizeChip(size);
+  });
+  $('#size-input').val('').focus();
+}
+
+function addSizeChip(size) {
+  const chip = $(`
+    <div class="size-chip">
+      ${size}
+      <button onclick="removeSizeChip(this)" title="Supprimer">✕</button>
+    </div>
+  `);
+  chip.data('size', size);
+  $('#sizes-chips').append(chip);
+}
+
+function removeSizeChip(btn) {
+  $(btn).closest('.size-chip').remove();
+}
+
+// ===== PROGRESS STEPS =====
+function setStep(stepId, state) {
+  // state: 'active' | 'done' | 'error' | ''
+  const el = $(`#${stepId}`);
+  el.removeClass('active done error').addClass(state);
+}
+
+// ===== SUBMIT PRODUCT =====
+async function submitProduct() {
+  // Validation config
+  if (!CONFIG.owner || !CONFIG.repo || !CONFIG.token) {
+    showToast('⚠ Configurez d\'abord GitHub dans la barre latérale.', 'error');
+    return;
+  }
+
+  // Validation form
+  const name = $('#p-name').val().trim();
+  const category = $('#p-category').val();
+  const price = parseInt($('#p-price').val());
+  const oldPriceVal = $('#p-old-price').val().trim();
+  const description = $('#p-description').val().trim();
+
+  if (!name || !category || !price || !description) {
+    showToast('⚠ Veuillez remplir tous les champs obligatoires (*).', 'error');
+    return;
+  }
+  if (!selectedImageFile) {
+    showToast('⚠ Veuillez sélectionner une image produit.', 'error');
+    return;
+  }
+
+  // Collect colors
+  const colors = [], colorNames = [];
+  $('#colors-editor .color-entry').each(function () {
+    const hex = $(this).find('input[type="color"]').val();
+    const cname = $(this).find('input[type="text"]').val().trim();
+    if (hex && cname) { colors.push(hex); colorNames.push(cname); }
+  });
+  if (colors.length === 0) {
+    showToast('⚠ Ajoutez au moins une couleur.', 'error');
+    return;
+  }
+
+  // Collect sizes
+  const sizes = [];
+  $('#sizes-chips .size-chip').each(function () {
+    sizes.push($(this).data('size') || $(this).text().replace('✕','').trim());
+  });
+
+  // Disable button
+  $('#btn-submit').prop('disabled', true);
+  $('#btn-text').text('Publication en cours…');
+  $('#progress-wrap').css('display', 'flex');
+  ['step-image','step-json','step-done'].forEach(s => setStep(s, ''));
+
+  try {
+    // ── ÉTAPE 1 : Upload de l'image ──
+    setStep('step-image', 'active');
+    const imagePath = `images/${selectedImageName}`;
+    const imageBase64 = await fileToBase64(selectedImageFile);
+    const imageUrl = `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/${imagePath}`;
+
+    // Check if file already exists (to get its SHA)
+    let imageSha = null;
+    try {
+      const existing = await githubGet(`contents/${imagePath}`);
+      imageSha = existing.sha;
+    } catch(e) { /* fichier n'existe pas encore, c'est ok */ }
+
+    await githubPut(`contents/${imagePath}`, {
+      message: `feat: upload image ${selectedImageName}`,
+      content: imageBase64,
+      branch: CONFIG.branch,
+      ...(imageSha ? { sha: imageSha } : {})
+    });
+    setStep('step-image', 'done');
+
+    // ── ÉTAPE 2 : Mise à jour de products.json ──
+    setStep('step-json', 'active');
+
+    // Récupérer le SHA actuel de products.json
+    const jsonFile = await githubGet(`contents/products.json?ref=${CONFIG.branch}`);
+    const currentContent = JSON.parse(atob(jsonFile.content.replace(/\n/g, '')));
+
+    // Générer le nouvel ID
+    const newId = currentContent.products.length > 0
+      ? Math.max(...currentContent.products.map(p => p.id)) + 1
+      : 1;
+
+    // Construire le nouveau produit
+    const newProduct = {
+      id: newId,
+      category,
+      name,
+      image: imageUrl,
+      price,
+      oldPrice: oldPriceVal ? parseInt(oldPriceVal) : null,
+      isNew: $('#p-is-new').is(':checked'),
+      isPromo: $('#p-is-promo').is(':checked'),
+      description,
+      colors,
+      colorNames,
+      sizes
+    };
+
+    currentContent.products.push(newProduct);
+
+    // Encoder et commiter
+    const updatedJson = JSON.stringify(currentContent, null, 2);
+    const encodedJson = btoa(unescape(encodeURIComponent(updatedJson)));
+
+    await githubPut(`contents/products.json`, {
+      message: `feat: ajouter produit "${name}" (id: ${newId})`,
+      content: encodedJson,
+      sha: jsonFile.sha,
+      branch: CONFIG.branch
+    });
+    setStep('step-json', 'done');
+
+    // ── ÉTAPE 3 : Succès ──
+    setStep('step-done', 'done');
+    PRODUCTS_DATA = currentContent.products;
+    renderProductsList();
+    updateStats();
+    showToast(`✓ Produit "${name}" publié avec succès !`, 'success');
+    resetForm();
+
+  } catch (err) {
+    const stepActive = $('.progress-step.active').attr('id');
+    if (stepActive) setStep(stepActive, 'error');
+    const msg = err.responseJSON?.message || err.message || 'Erreur inconnue';
+    showToast(`✕ Erreur : ${msg}`, 'error');
+    console.error(err);
+  } finally {
+    $('#btn-submit').prop('disabled', false);
+    $('#btn-text').text('✦ Publier le produit');
+  }
+}
+
+// ===== DELETE PRODUCT =====
+async function deleteProduct(id) {
+  if (!confirm(`Supprimer le produit #${id} ? Cette action est irréversible.`)) return;
+
+  try {
+    const jsonFile = await githubGet(`contents/products.json?ref=${CONFIG.branch}`);
+    const data = JSON.parse(atob(jsonFile.content.replace(/\n/g, '')));
+    data.products = data.products.filter(p => p.id !== id);
+
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    await githubPut(`contents/products.json`, {
+      message: `feat: supprimer produit #${id}`,
+      content: encoded,
+      sha: jsonFile.sha,
+      branch: CONFIG.branch
+    });
+
+    PRODUCTS_DATA = data.products;
+    renderProductsList();
+    updateStats();
+    showToast('✓ Produit supprimé.', 'success');
+
+  } catch (err) {
+    showToast(`✕ Erreur suppression : ${err.responseJSON?.message || err.message}`, 'error');
+  }
+}
+
+// ===== GITHUB API HELPERS =====
+function githubGet(path) {
+  return $.ajax({
+    url: `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/${path}`,
+    headers: {
+      Authorization: `token ${CONFIG.token}`,
+      Accept: 'application/vnd.github.v3+json'
+    }
+  });
+}
+
+function githubPut(path, body) {
+  return $.ajax({
+    url: `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/${path}`,
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${CONFIG.token}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(body)
+  });
+}
+
+// ===== UTILS =====
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      // Supprimer le préfixe "data:image/...;base64,"
+      resolve(reader.result.split(',')[1]);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function resetForm() {
+  $('#p-name, #p-price, #p-old-price, #p-description').val('');
+  $('#p-category').val('chaussures');
+  $('#p-is-new, #p-is-promo').prop('checked', false);
+  removeImage();
+  $('#colors-editor').html(`
+    <div class="color-entry">
+      <input type="color" value="#1a1a1a" />
+      <input type="text" class="form-control" placeholder="Nom : ex. Noir" value="Noir" />
+      <button class="btn-icon" onclick="removeColorRow(this)" title="Supprimer">✕</button>
+    </div>
+  `);
+  $('#sizes-chips').empty();
+  $('#size-input').val('');
+  $('#progress-wrap').hide();
+  ['step-image','step-json','step-done'].forEach(s => setStep(s, ''));
+}
+
+function showToast(msg, type = '') {
+  const t = $('#toast');
+  t.text(msg).removeClass('success error').addClass(type).addClass('show');
+  setTimeout(() => t.removeClass('show'), 4000);
+}
+</script>
+</body>
+</html>

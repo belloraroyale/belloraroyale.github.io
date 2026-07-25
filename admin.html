@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bellora Royale — Ajout de produits</title>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- JSZip : génération du ZIP dans le navigateur -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <!-- FileSaver : déclenchement du téléchargement -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================
+       RESET & VARIABLES
+    ============================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold:       #D4AF37;
+      --gold-light: #F0D060;
+      --black:      #080808;
+      --black-2:    #111111;
+      --black-3:    #1A1A1A;
+      --black-4:    #242424;
+      --white:      #FAFAFA;
+      --gray:       #888;
+      --gray-light: #bbb;
+      --green:      #27ae60;
+      --red:        #e74c3c;
+      --blue:       #2980b9;
+      --T: 0.28s ease;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.3); }
+
+    /* ============================
+       HEADER
+    ============================ */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(212,175,55,0.12);
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: var(--white);
+      display: flex; align-items: center; gap: 9px;
+    }
+    .logo-star { color: var(--gold); }
+    .logo em { font-style: italic; color: var(--gold); }
+    .header-pill {
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
+      color: var(--gold); font-size: 0.62rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 20px;
+    }
+    .header-back {
+      font-size: 0.78rem; color: var(--gray-light);
+      text-decoration: none; transition: color var(--T);
+    }
+    .header-back:hover { color: var(--gold); }
+
+    /* ============================
+       LAYOUT
+    ============================ */
+    .page { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 500; margin-bottom: 6px;
+    }
+    .page-title em { font-style: italic; color: var(--gold); }
+    .page-sub { font-size: 0.85rem; color: var(--gray); margin-bottom: 36px; }
+
+    /* ============================
+       PRODUCT CARDS CONTAINER
+    ============================ */
+    #products-container { display: flex; flex-direction: column; gap: 24px; }
+
+    /* ============================
+       PRODUCT CARD
+    ============================ */
+    .product-card {
+      background: var(--black-3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid rgba(212,175,55,0.35);
+      overflow: hidden;
+      animation: slideIn 0.35s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      background: var(--black-4);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer; user-select: none;
+    }
+    .card-header-left { display: flex; align-items: center; gap: 12px; }
+    .card-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.3);
+      color: var(--gold); font-size: 0.75rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-label {
+      font-size: 0.88rem; font-weight: 500; color: var(--white);
+    }
+    .card-label small { color: var(--gray); font-weight: 300; font-size: 0.78rem; }
+    .card-actions { display: flex; align-items: center; gap: 8px; }
+    .btn-collapse {
+      background: none; border: none; color: var(--gray);
+      font-size: 1rem; cursor: pointer; transition: color var(--T);
+      width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+    }
+    .btn-collapse:hover { color: var(--gold); }
+    .btn-collapse.collapsed { transform: rotate(-90deg); }
+    .btn-remove-card {
+      background: none; border: 1px solid rgba(231,76,60,0.2);
+      color: rgba(231,76,60,0.7); font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.08em; padding: 4px 12px; cursor: pointer;
+      transition: var(--T);
+    }
+    .btn-remove-card:hover { background: rgba(231,76,60,0.1); border-color: var(--red); color: var(--red); }
+
+    .card-body { padding: 24px; }
+    .card-body.collapsed { display: none; }
+
+    /* ============================
+       FORM ELEMENTS
+    ============================ */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group.third { grid-column: span 1; }
+
+    .f-label {
+      font-size: 0.68rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gray);
+    }
+    .f-label .req { color: var(--red); margin-left: 2px; }
+
+    .f-input, .f-select, .f-textarea {
+      background: var(--black-4);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(212,175,55,0.22);
+      color: var(--white); padding: 10px 13px;
+      font-family: 'Inter', sans-serif; font-size: 0.87rem;
+      outline: none; width: 100%;
+      transition: border-color var(--T);
+    }
+    .f-input:focus, .f-select:focus, .f-textarea:focus {
+      border-bottom-color: var(--gold);
+    }
+    .f-input::placeholder, .f-textarea::placeholder { color: var(--gray); font-size: 0.82rem; }
+    .f-input[type="number"] { -moz-appearance: textfield; }
+    .f-input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .f-select option { background: var(--black-3); }
+    .f-textarea { resize: vertical; min-height: 80px; line-height: 1.65; }
+
+    /* Toggles */
+    .toggle-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; padding: 4px 0; }
+    .toggle-item { display: flex; align-items: center; gap: 9px; cursor: pointer; }
+    .toggle-item input[type="checkbox"] { display: none; }
+    .toggle-track {
+      width: 38px; height: 21px; background: var(--black-4);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 11px;
+      position: relative; cursor: pointer; flex-shrink: 0;
+      transition: background var(--T), border-color var(--T);
+    }
+    .toggle-track::after {
+      content: ''; position: absolute;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: var(--gray); top: 2px; left: 2px;
+      transition: transform var(--T), background var(--T);
+    }
+    .toggle-item input:checked + .toggle-track { background: rgba(212,175,55,0.15); border-color: var(--gold); }
+    .toggle-item input:checked + .toggle-track::after { transform: translateX(17px); background: var(--gold); }
+    .toggle-label { font-size: 0.83rem; color: var(--gray-light); }
+
+    /* Section divider inside card */
+    .f-divider {
+      grid-column: 1 / -1;
+      height: 1px; background: rgba(255,255,255,0.05);
+      margin: 6px 0;
+    }
+    .f-section {
+      grid-column: 1 / -1;
+      font-size: 0.62rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+      padding-bottom: 6px; margin-top: 4px;
+    }
+
+    /* ============================
+       IMAGE UPLOAD
+    ============================ */
+    .upload-area {
+      border: 2px dashed rgba(212,175,55,0.2);
+      background: var(--black-4);
+      padding: 28px 20px; text-align: center;
+      cursor: pointer; transition: var(--T); position: relative;
+      grid-column: 1 / -1;
+    }
+    .upload-area:hover, .upload-area.over {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.03);
+    }
+    .upload-area input[type="file"] {
+      position: absolute; inset: 0;
+      opacity: 0; width: 100%; height: 100%; cursor: pointer;
+    }
+    .upload-icon { font-size: 2rem; opacity: 0.4; margin-bottom: 8px; }
+    .upload-txt { font-size: 0.83rem; color: var(--gray-light); }
+    .upload-txt strong { color: var(--gold); }
+    .upload-hint { font-size: 0.7rem; color: var(--gray); margin-top: 3px; }
+
+    .img-preview {
+      grid-column: 1 / -1;
+      display: none; position: relative;
+    }
+    .img-preview img {
+      width: 100%; max-height: 200px; object-fit: cover;
+      border: 1px solid rgba(212,175,55,0.12);
+      display: block;
+    }
+    .img-preview-name {
+      font-size: 0.7rem; color: var(--gray); text-align: center; margin-top: 5px;
+    }
+    .btn-rm-img {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(0,0,0,0.75); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 0.8rem; transition: var(--T);
+    }
+    .btn-rm-img:hover { border-color: var(--red); color: var(--red); }
+
+    /* ============================
+       COLORS EDITOR
+    ============================ */
+    .colors-wrap { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; }
+    .color-row { display: flex; gap: 8px; align-items: center; }
+    .color-row input[type="color"] {
+      width: 40px; height: 38px; padding: 3px;
+      background: var(--black-4); border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .btn-rm-row {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: transparent; border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gray); cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--T);
+    }
+    .btn-rm-row:hover { border-color: var(--red); color: var(--red); }
+    .btn-add-dashed {
+      background: transparent;
+      border: 1px dashed rgba(212,175,55,0.25);
+      color: var(--gold); padding: 7px 16px;
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; cursor: pointer;
+      transition: var(--T); width: 100%;
+    }
+    .btn-add-dashed:hover { background: rgba(212,175,55,0.05); border-color: var(--gold); }
+
+    /* ============================
+       SIZES EDITOR
+    ============================ */
+    .sizes-wrap { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; }
+    .sizes-input-row { display: flex; gap: 8px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; min-height: 20px; }
+    .chip {
+      background: var(--black-4);
+      border: 1px solid rgba(212,175,55,0.2);
+      color: var(--gold); padding: 4px 10px 4px 12px;
+      font-size: 0.78rem; display: flex; align-items: center; gap: 7px;
+    }
+    .chip button {
+      background: none; border: none; color: var(--gray);
+      cursor: pointer; font-size: 0.8rem; line-height: 1;
+      padding: 0; transition: color var(--T);
+    }
+    .chip button:hover { color: var(--red); }
+    .sizes-hint { font-size: 0.7rem; color: var(--gray); }
+
+    /* ============================
+       ADD PRODUCT BUTTON
+    ============================ */
+    .btn-add-product {
+      width: 100%; padding: 16px;
+      background: transparent;
+      border: 2px dashed rgba(212,175,55,0.25);
+      color: var(--gold); font-size: 0.82rem;
+      font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; cursor: pointer;
+      transition: var(--T); margin-top: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-add-product:hover {
+      background: rgba(212,175,55,0.05);
+      border-color: var(--gold);
+    }
+
+    /* ============================
+       BOTTOM BAR
+    ============================ */
+    .bottom-bar {
+      position: sticky; bottom: 0;
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(212,175,55,0.12);
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      margin: 40px -24px -80px;
+    }
+    .bar-info { font-size: 0.82rem; color: var(--gray-light); }
+    .bar-info strong { color: var(--gold); font-weight: 600; }
+    .bar-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn-reset-all {
+      padding: 12px 22px; background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--gray-light); font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: var(--T);
+    }
+    .btn-reset-all:hover { border-color: var(--gray-light); color: var(--white); }
+
+    .btn-generate {
+      padding: 13px 36px; background: var(--gold); color: var(--black);
+      border: none; font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer; transition: var(--T);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .btn-generate:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(212,175,55,0.25); }
+    .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ============================
+       MODAL SUCCESS
+    ============================ */
+    .modal-bg {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-bg.show { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--black-3);
+      border: 1px solid rgba(212,175,55,0.2);
+      padding: 40px 36px; max-width: 420px; width: 100%;
+      text-align: center;
+      transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .modal-bg.show .modal-box { transform: translateY(0); }
+    .modal-icon { font-size: 3rem; margin-bottom: 16px; }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 500; margin-bottom: 10px;
+    }
+    .modal-title em { font-style: italic; color: var(--gold); }
+    .modal-desc { font-size: 0.85rem; color: var(--gray-light); line-height: 1.7; margin-bottom: 28px; }
+    .modal-desc code {
+      background: var(--black-4); padding: 2px 7px;
+      font-size: 0.8rem; color: var(--gold); border-radius: 2px;
+    }
+    .modal-desc ul { text-align: left; padding-left: 20px; margin-top: 10px; }
+    .modal-desc li { margin-bottom: 4px; }
+    .btn-modal-close {
+      padding: 12px 32px; background: var(--gold); color: var(--black);
+      border: none; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      cursor: pointer; transition: var(--T);
+    }
+    .btn-modal-close:hover { background: var(--gold-light); }
+
+    /* ============================
+       TOAST
+    ============================ */
+    .toast {
+      position: fixed; bottom: 80px; right: 24px; z-index: 999;
+      background: var(--black-3); border: 1px solid rgba(212,175,55,0.25);
+      color: var(--white); padding: 12px 20px;
+      font-size: 0.82rem; line-height: 1.4; max-width: 320px;
+      opacity: 0; transform: translateY(10px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.err { border-color: rgba(231,76,60,0.4); }
+    .toast.ok  { border-color: rgba(39,174,96,0.4); }
+
+    /* ============================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 640px) {
+      .header { padding: 0 16px; }
+      .header-pill { display: none; }
+      .page { padding: 28px 16px 80px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full, .f-section, .f-divider,
+      .upload-area, .img-preview, .colors-wrap, .sizes-wrap { grid-column: 1; }
+      .bottom-bar { margin: 28px -16px -80px; padding: 14px 16px; }
+      .bar-info { width: 100%; }
+      .bar-actions { width: 100%; }
+      .btn-generate { flex: 1; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <span class="logo-star">✦</span>
+    Bellora <em>Royale</em>
+    <div class="header-pill">Admin</div>
+  </div>
+  <a class="header-back" href="index.html">← Voir le site</a>
+</header>
+
+<!-- PAGE -->
+<div class="page">
+  <h1 class="page-title">Saisie des <em>produits</em></h1>
+  <p class="page-sub">
+    Remplissez un ou plusieurs produits ci-dessous, puis cliquez sur <strong>Générer le ZIP</strong>.
+    Vous obtiendrez un fichier <code>bellora-products.zip</code> contenant <code>products.json</code> et le dossier <code>images/</code> à déposer sur votre hébergement.
+  </p>
+
+  <!-- PRODUCTS CONTAINER -->
+  <div id="products-container"></div>
+
+  <!-- ADD PRODUCT BUTTON -->
+  <button class="btn-add-product" onclick="addProductCard()">
+    <span style="font-size:1.1rem;">+</span> Ajouter un produit
+  </button>
+
+  <!-- BOTTOM BAR -->
+  <div class="bottom-bar">
+    <div class="bar-info">
+      <strong id="product-count">0</strong> produit(s) saisi(s)
+    </div>
+    <div class="bar-actions">
+      <button class="btn-reset-all" onclick="resetAll()">Tout effacer</button>
+      <button class="btn-generate" id="btn-generate" onclick="generateZip()">
+        ⬇ Générer le ZIP
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-bg" id="modal">
+  <div class="modal-box">
+    <div class="modal-icon">🎉</div>
+    <h2 class="modal-title">ZIP <em>généré !</em></h2>
+    <p class="modal-desc">
+      Votre fichier <code>bellora-products.zip</code> a été téléchargé. Il contient :
+      <ul>
+        <li><code>products.json</code> — tous vos produits</li>
+        <li><code>images/</code> — toutes les images uploadées</li>
+      </ul>
+      <br/>Déposez ces fichiers à la racine de votre repository GitHub Pages (en remplaçant les anciens).
+    </p>
+    <button class="btn-modal-close" onclick="closeModal()">Parfait, merci !</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+/* ============================================================
+   STATE
+============================================================ */
+let cardCount = 0;    // compteur incrémental pour les IDs
+let cardIds   = [];   // liste des IDs actuellement affichés
+
+/* ============================================================
+   INIT — on crée 1 carte au chargement
+============================================================ */
+$(function () {
+  addProductCard();
+});
+
+/* ============================================================
+   AJOUTER UNE CARTE PRODUIT
+============================================================ */
+function addProductCard() {
+  cardCount++;
+  const id = cardCount;
+  cardIds.push(id);
+  updateCount();
+
+  const html = `
+  <div class="product-card" id="card-${id}">
+
+    <!-- En-tête de la carte -->
+    <div class="card-header" onclick="toggleCard(${id})">
+      <div class="card-header-left">
+        <div class="card-num" id="num-${id}">${cardIds.length}</div>
+        <div class="card-label">
+          Produit <span id="card-title-${id}">sans titre</span>
+          <small id="card-cat-${id}"></small>
+        </div>
+      </div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        <button class="btn-collapse" id="btn-col-${id}" title="Réduire">▼</button>
+        <button class="btn-remove-card" onclick="removeCard(${id})">✕ Supprimer</button>
+      </div>
+    </div>
+
+    <!-- Corps de la carte -->
+    <div class="card-body" id="body-${id}">
+      <div class="form-grid">
+
+        <!-- NOM -->
+        <div class="form-group">
+          <label class="f-label">Nom du produit <span class="req">*</span></label>
+          <input type="text" class="f-input" id="name-${id}"
+            placeholder="ex: Escarpins Dorés Élite"
+            oninput="updateCardTitle(${id})" />
+        </div>
+
+        <!-- CATÉGORIE -->
+        <div class="form-group">
+          <label class="f-label">Catégorie <span class="req">*</span></label>
+          <select class="f-select" id="cat-${id}" onchange="updateCardTitle(${id})">
+            <option value="chaussures">👠 Chaussures</option>
+            <option value="vetements">👔 Vêtements</option>
+            <option value="parfums">🧴 Parfums</option>
+          </select>
+        </div>
+
+        <!-- PRIX -->
+        <div class="form-group">
+          <label class="f-label">Prix (FCFA) <span class="req">*</span></label>
+          <input type="number" class="f-input" id="price-${id}"
+            placeholder="85000" min="0" />
+        </div>
+
+        <!-- ANCIEN PRIX -->
+        <div class="form-group">
+          <label class="f-label">Ancien prix <small style="color:var(--gray)">(optionnel)</small></label>
+          <input type="number" class="f-input" id="old-price-${id}"
+            placeholder="110000" min="0" />
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="form-group full">
+          <label class="f-label">Description <span class="req">*</span></label>
+          <textarea class="f-textarea" id="desc-${id}"
+            placeholder="Matière, coupe, caractéristiques…"></textarea>
+        </div>
+
+        <!-- STATUT -->
+        <div class="form-group full">
+          <label class="f-label">Statut</label>
+          <div class="toggle-row">
+            <label class="toggle-item">
+              <input type="checkbox" id="isnew-${id}" />
+              <div class="toggle-track"></div>
+              <span class="toggle-label">✦ Nouveauté</span>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" id="ispromo-${id}" />
+              <div class="toggle-track"></div>
+              <span class="toggle-label">🏷 En promotion</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="f-section">🖼 Image du produit</div>
+
+        <div class="upload-area" id="zone-${id}">
+          <input type="file" id="img-${id}" accept="image/jpeg,image/png,image/webp,image/gif"
+            onchange="handleImage(${id}, this)" />
+          <div class="upload-icon">🖼</div>
+          <div class="upload-txt"><strong>Cliquez</strong> ou glissez l'image ici</div>
+          <div class="upload-hint">JPEG · PNG · WebP — max 5 Mo</div>
+        </div>
+
+        <div class="img-preview" id="preview-${id}">
+          <img id="preview-img-${id}" src="" alt="Aperçu" />
+          <button class="btn-rm-img" onclick="removeImage(${id})" title="Retirer">✕</button>
+          <p class="img-preview-name" id="preview-name-${id}"></p>
+        </div>
+
+        <!-- COULEURS -->
+        <div class="f-section">🎨 Couleurs disponibles</div>
+
+        <div class="colors-wrap" id="colors-${id}">
+          <div class="color-row">
+            <input type="color" value="#1a1a1a" />
+            <input type="text" class="f-input" placeholder="Nom (ex: Noir)" value="Noir" style="flex:1;" />
+            <button class="btn-rm-row" onclick="removeColorRow(this, ${id})" title="Supprimer">✕</button>
+          </div>
+        </div>
+        <div class="form-group full">
+          <button class="btn-add-dashed" onclick="addColorRow(${id})">+ Ajouter une couleur</button>
+        </div>
+
+        <!-- TAILLES -->
+        <div class="f-section">📐 Tailles disponibles</div>
+
+        <div class="sizes-wrap" id="sizes-wrap-${id}">
+          <div class="sizes-input-row">
+            <input type="text" class="f-input" id="size-input-${id}"
+              placeholder="ex: 40  ou  M  ou  100ml — Entrée pour ajouter"
+              style="flex:1;"
+              onkeydown="if(event.key==='Enter'){event.preventDefault();addSize(${id});}" />
+            <button class="btn-rm-row" style="border-color:rgba(212,175,55,0.2);color:var(--gold);"
+              onclick="addSize(${id})" title="Ajouter">+</button>
+          </div>
+          <div class="chips" id="chips-${id}"></div>
+          <p class="sizes-hint">Séparez par virgule ou appuyez sur Entrée. Laissez vide si non applicable.</p>
+        </div>
+
+      </div><!-- /.form-grid -->
+    </div><!-- /.card-body -->
+  </div><!-- /.product-card -->
+  `;
+
+  $('#products-container').append(html);
+
+  // Drag & drop pour cette carte
+  const zone = document.getElementById(`zone-${id}`);
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('over');
+    if (e.dataTransfer.files[0]) handleImageFromFile(id, e.dataTransfer.files[0]);
+  });
+}
+
+/* ============================================================
+   TITRE DYNAMIQUE DE LA CARTE
+============================================================ */
+function updateCardTitle(id) {
+  const name = $(`#name-${id}`).val().trim() || 'sans titre';
+  const cat  = $(`#cat-${id}`).val();
+  const catLabel = { chaussures: '· Chaussures', vetements: '· Vêtements', parfums: '· Parfums' }[cat] || '';
+  $(`#card-title-${id}`).text(name);
+  $(`#card-cat-${id}`).text(' ' + catLabel);
+}
+
+/* ============================================================
+   COLLAPSE / EXPAND CARTE
+============================================================ */
+function toggleCard(id) {
+  const body = $(`#body-${id}`);
+  const btn  = $(`#btn-col-${id}`);
+  body.toggleClass('collapsed');
+  btn.toggleClass('collapsed');
+}
+
+/* ============================================================
+   SUPPRIMER UNE CARTE
+============================================================ */
+function removeCard(id) {
+  if (cardIds.length === 1) {
+    showToast('Au moins un produit est requis.', 'err');
+    return;
+  }
+  $(`#card-${id}`).remove();
+  cardIds = cardIds.filter(x => x !== id);
+  renumberCards();
+  updateCount();
+}
+
+function renumberCards() {
+  cardIds.forEach((id, i) => $(`#num-${id}`).text(i + 1));
+}
+
+function updateCount() {
+  $('#product-count').text(cardIds.length);
+}
+
+/* ============================================================
+   IMAGE
+============================================================ */
+function handleImage(id, input) {
+  if (input.files[0]) handleImageFromFile(id, input.files[0]);
+}
+
+function handleImageFromFile(id, file) {
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('Image trop volumineuse (max 5 Mo).', 'err');
+    return;
+  }
+  // Stocker le fichier sur l'élément DOM pour le récupérer au moment de générer le ZIP
+  document.getElementById(`zone-${id}`)._file = file;
+
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').toLowerCase();
+  document.getElementById(`zone-${id}`)._fileName = safeName;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    $(`#preview-img-${id}`).attr('src', e.target.result);
+    $(`#preview-name-${id}`).text(safeName);
+    $(`#preview-${id}`).show();
+    $(`#zone-${id}`).hide();
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeImage(id) {
+  $(`#img-${id}`).val('');
+  $(`#preview-${id}`).hide();
+  $(`#zone-${id}`).show();
+  const zone = document.getElementById(`zone-${id}`);
+  zone._file = null;
+  zone._fileName = null;
+}
+
+/* ============================================================
+   COULEURS
+============================================================ */
+function addColorRow(id) {
+  const row = $(`
+    <div class="color-row">
+      <input type="color" value="#D4AF37" />
+      <input type="text" class="f-input" placeholder="Nom (ex: Or)" style="flex:1;" />
+      <button class="btn-rm-row" onclick="removeColorRow(this, ${id})" title="Supprimer">✕</button>
+    </div>
+  `);
+  $(`#colors-${id}`).append(row);
+}
+
+function removeColorRow(btn, id) {
+  const rows = $(`#colors-${id} .color-row`);
+  if (rows.length <= 1) { showToast('Au moins une couleur est requise.', 'err'); return; }
+  $(btn).closest('.color-row').remove();
+}
+
+/* ============================================================
+   TAILLES
+============================================================ */
+function addSize(id) {
+  const input = $(`#size-input-${id}`);
+  const val = input.val().trim();
+  if (!val) return;
+  val.split(',').forEach(s => {
+    const t = s.trim();
+    if (t) addChip(id, t);
+  });
+  input.val('').focus();
+}
+
+function addChip(id, size) {
+  const chip = $(`
+    <div class="chip" data-size="${size}">
+      ${size}
+      <button onclick="$(this).closest('.chip').remove()" title="Retirer">✕</button>
+    </div>
+  `);
+  $(`#chips-${id}`).append(chip);
+}
+
+/* ============================================================
+   COLLECTER LES DONNÉES D'UNE CARTE
+============================================================ */
+function collectCard(id, index) {
+  // Champs texte
+  const name     = $(`#name-${id}`).val().trim();
+  const category = $(`#cat-${id}`).val();
+  const price    = parseInt($(`#price-${id}`).val()) || 0;
+  const oldPriceVal = $(`#old-price-${id}`).val().trim();
+  const desc     = $(`#desc-${id}`).val().trim();
+  const isNew    = $(`#isnew-${id}`).is(':checked');
+  const isPromo  = $(`#ispromo-${id}`).is(':checked');
+
+  // Validation
+  if (!name)  { showToast(`Produit #${index} : le nom est obligatoire.`, 'err'); return null; }
+  if (!price) { showToast(`Produit #${index} : le prix est obligatoire.`, 'err'); return null; }
+  if (!desc)  { showToast(`Produit #${index} : la description est obligatoire.`, 'err'); return null; }
+
+  // Image
+  const zone      = document.getElementById(`zone-${id}`);
+  const imageFile = zone._file || null;
+  const imageName = zone._fileName || null;
+  if (!imageFile) { showToast(`Produit #${index} : veuillez sélectionner une image.`, 'err'); return null; }
+
+  // Couleurs
+  const colors = [], colorNames = [];
+  $(`#colors-${id} .color-row`).each(function () {
+    const hex   = $(this).find('input[type="color"]').val();
+    const cname = $(this).find('input[type="text"]').val().trim();
+    if (hex && cname) { colors.push(hex); colorNames.push(cname); }
+  });
+  if (colors.length === 0) { showToast(`Produit #${index} : ajoutez au moins une couleur.`, 'err'); return null; }
+
+  // Tailles
+  const sizes = [];
+  $(`#chips-${id} .chip`).each(function () { sizes.push($(this).data('size')); });
+
+  return {
+    product: {
+      id: index,
+      category,
+      name,
+      image: `images/${imageName}`,   // chemin relatif dans le ZIP
+      price,
+      oldPrice: oldPriceVal ? parseInt(oldPriceVal) : null,
+      isNew,
+      isPromo,
+      description: desc,
+      colors,
+      colorNames,
+      sizes
+    },
+    imageFile,
+    imageName
+  };
+}
+
+/* ============================================================
+   GÉNÉRER LE ZIP
+============================================================ */
+async function generateZip() {
+  if (cardIds.length === 0) { showToast('Aucun produit à exporter.', 'err'); return; }
+
+  // Collecter toutes les cartes
+  const collected = [];
+  for (let i = 0; i < cardIds.length; i++) {
+    const data = collectCard(cardIds[i], i + 1);
+    if (!data) return;   // erreur de validation → stop
+    collected.push(data);
+  }
+
+  // Désactiver le bouton
+  $('#btn-generate').prop('disabled', true).text('Génération…');
+
+  try {
+    const zip = new JSZip();
+
+    // ── 1. Créer products.json ──
+    const productsJson = {
+      products: collected.map(c => c.product)
+    };
+    zip.file('products.json', JSON.stringify(productsJson, null, 2));
+
+    // ── 2. Ajouter chaque image dans images/ ──
+    const imgFolder = zip.folder('images');
+    for (const c of collected) {
+      const arrayBuffer = await c.imageFile.arrayBuffer();
+      imgFolder.file(c.imageName, arrayBuffer);
+    }
+
+    // ── 3. Télécharger le ZIP ──
+    const blob = await zip.generateAsync({
+      type: 'blob',
+      compression: 'DEFLATE',
+      compressionOptions: { level: 6 }
+    });
+
+    saveAs(blob, 'bellora-products.zip');
+
+    // Succès
+    openModal();
+
+  } catch (err) {
+    console.error(err);
+    showToast(`Erreur lors de la génération : ${err.message}`, 'err');
+  } finally {
+    $('#btn-generate').prop('disabled', false).html('⬇ Générer le ZIP');
+  }
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+function resetAll() {
+  if (!confirm('Effacer tous les produits saisis ?')) return;
+  $('#products-container').empty();
+  cardIds = [];
+  cardCount = 0;
+  updateCount();
+  addProductCard();
+}
+
+/* ============================================================
+   MODAL
+============================================================ */
+function openModal()  { $('#modal').addClass('show'); }
+function closeModal() { $('#modal').removeClass('show'); }
+
+/* ============================================================
+   TOAST
+============================================================ */
+function showToast(msg, type = '') {
+  const t = $('#toast');
+  t.text(msg).removeClass('ok err').addClass(type).addClass('show');
+  setTimeout(() => t.removeClass('show'), 4000);
+}
+</script>
+</body>
+</html>
