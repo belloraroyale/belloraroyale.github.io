@@ -615,6 +615,752 @@
         44,
         45
       ]
+    },
+    {
+      "id": 30,
+      "category": "parfums",
+      "name": "CARTIER",
+      "image": "images/d43a89a5-5cfe-4009-bb42-cb5cf0bd94fb.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#831100"
+      ],
+      "colorNames": [
+        "Rouge"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 31,
+      "category": "parfums",
+      "name": "Sauvage Élixir",
+      "image": "images/212ddaff-6e03-4d58-a502-4ebbc13087ba.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 32,
+      "category": "parfums",
+      "name": "VERSACE",
+      "image": "images/49a50e4c-7b0a-4ec5-b2d7-26956c807fbe.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#011d57"
+      ],
+      "colorNames": [
+        "Bleu"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 33,
+      "category": "parfums",
+      "name": "Love in White",
+      "image": "images/321c9570-28bf-40f8-8b6b-a110f5411726.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 34,
+      "category": "parfums",
+      "name": "PURE AMBRE",
+      "image": "images/75914f61-190d-4168-8598-835532bc06a0.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 35,
+      "category": "parfums",
+      "name": "Yves Saint Laurent",
+      "image": "images/e9893962-6134-4851-8627-3283c92f8971.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#0042a9"
+      ],
+      "colorNames": [
+        "Bleu"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 36,
+      "category": "parfums",
+      "name": "SCANDAL",
+      "image": "images/img_6103.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#ffb5af",
+        "#791a3d",
+        "#ffab01"
+      ],
+      "colorNames": [
+        "Rose",
+        "Rouge",
+        "Orange"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 37,
+      "category": "parfums",
+      "name": "DOLCE & GABBANA",
+      "image": "images/img_6102.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 38,
+      "category": "parfums",
+      "name": "GUCCI FLORA",
+      "image": "images/img_6101.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Rose"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 39,
+      "category": "parfums",
+      "name": "PRADA",
+      "image": "images/280cdd5a-0cc8-4fb0-bb39-32c088c82978.jpeg",
+      "price": 11000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#f4a4c0"
+      ],
+      "colorNames": [
+        "Rose"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 40,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/fa7edc96-eb59-46e9-9f57-cf7a4009467d.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#ffffff",
+        "#263e0f"
+      ],
+      "colorNames": [
+        "Blanc",
+        "Vert"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 41,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/c2e25029-9a39-4aa6-9c56-a6e0d493612e.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#1a1a1a",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Noir",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 42,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/d252a08a-07db-410b-b574-0e16857f0250.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#012f7b",
+        "#93e3fd"
+      ],
+      "colorNames": [
+        "Bleue",
+        "Bleue"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 43,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/4353a41e-8e15-4158-9121-ce474672d75b.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#1a1a1a",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Noir",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 44,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/647bbe54-d255-4f63-a160-55442bb09bb1.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#1a1a1a",
+        "#7a4a00"
+      ],
+      "colorNames": [
+        "Bleue de nuit",
+        "Marron"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 45,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/7661f7f4-0751-4df1-b626-3cf102dd2fdf.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#263e0f",
+        "#000000",
+        "#fff2d5"
+      ],
+      "colorNames": [
+        "Vert",
+        "Noir",
+        "Beige sable"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 46,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/de305412-6c60-4e26-b341-a7996e2fc36a.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#1a1a1a",
+        "#93e3fd"
+      ],
+      "colorNames": [
+        "Noir",
+        "Bleue ciel"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 47,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/941d5eec-9cec-40ba-bff4-4326e145429e.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#583300",
+        "#c2c2c2"
+      ],
+      "colorNames": [
+        "Marron",
+        "Gris"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 48,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/4c9bc17e-d978-4bb3-8175-3f544e78b276.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 49,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/382f7073-7d3b-4002-9c92-7e54508104ab.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 50,
+      "category": "parfums",
+      "name": "J’adore",
+      "image": "images/img_6565.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 51,
+      "category": "parfums",
+      "name": "Baccarat rouge",
+      "image": "images/img_6564.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#831100"
+      ],
+      "colorNames": [
+        "Rouge"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 52,
+      "category": "parfums",
+      "name": "Élixir",
+      "image": "images/img_6563.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#fff2d5"
+      ],
+      "colorNames": [
+        "Beige sable"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 53,
+      "category": "parfums",
+      "name": "Jean Paul Gaultier",
+      "image": "images/img_6513.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#fecb3e"
+      ],
+      "colorNames": [
+        "Jaune"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 54,
+      "category": "parfums",
+      "name": "Tobacco OUD",
+      "image": "images/img_6512.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 55,
+      "category": "parfums",
+      "name": "Ameerat AL ARAB",
+      "image": "images/img_6511.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#791a3d"
+      ],
+      "colorNames": [
+        "Rouge"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 56,
+      "category": "parfums",
+      "name": "Amouage",
+      "image": "images/img_6320.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 57,
+      "category": "parfums",
+      "name": "AVENTUS",
+      "image": "images/img_6319.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 58,
+      "category": "parfums",
+      "name": "Habit rouge",
+      "image": "images/img_6318.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#5c0701"
+      ],
+      "colorNames": [
+        "Rouge"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 59,
+      "category": "parfums",
+      "name": "BVLGARI",
+      "image": "images/d53bf37c-66c9-4d74-94b4-18e659555e79.jpeg",
+      "price": 70000,
+      "oldPrice": 90000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Parfum de grande marque aux notes raffinées et élégantes, élaboré avec des essences de qualité pour offrir une fragrance unique, une longue tenue et une signature olfactive intemporelle qui sublime chaque personnalité.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 60,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/3e63573e-7f13-42a8-83ff-06aaaf44e144.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#00a1d8",
+        "#f7fadb"
+      ],
+      "colorNames": [
+        "Bleue",
+        "Beige sable"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 61,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/62b3d832-84ac-4999-8225-f67a11fafbc0.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#fff2d5"
+      ],
+      "colorNames": [
+        "Beige sable"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 62,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/a5b9acae-ad0b-4f6e-8ba8-3eb398d0f067.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#583300"
+      ],
+      "colorNames": [
+        "Marron"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 63,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/af60f0b1-789f-46fd-8325-db8047e78288.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#ffffff",
+        "#fff2d5"
+      ],
+      "colorNames": [
+        "Blanc",
+        "Beige sable"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 64,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/bd173755-24b6-43bb-9bbc-21b475980e2b.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 65,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/3cc0cac8-065f-41fa-8b79-ea5dd90f3ba4.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#0042a9"
+      ],
+      "colorNames": [
+        "Bleue"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 66,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/a9405705-c6f7-44af-a053-39175d8810ef.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 67,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/3354c543-bce1-48f1-8174-b02175639d62.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#583300"
+      ],
+      "colorNames": [
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 68,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/7225cc40-f9c3-4b12-9713-3b7cd582406d.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#551029"
+      ],
+      "colorNames": [
+        "Rouge"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 69,
+      "category": "vetements",
+      "name": "T-shirt",
+      "image": "images/88996b14-c57a-49c0-a041-925c47b3b1bb.jpeg",
+      "price": 11000,
+      "oldPrice": 13000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "T-shirt premium confectionné dans une matière douce, respirante et durable, avec une coupe moderne offrant un tombé élégant, un confort optimal et des finitions soignées pour un style à la fois chic et intemporel.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
     }
   ]
 }
