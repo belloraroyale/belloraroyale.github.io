@@ -1361,6 +1361,578 @@
         "Noir"
       ],
       "sizes": []
+    },
+    {
+      "id": 70,
+      "category": "vetements",
+      "name": "Tuniques 3 pièces",
+      "image": "images/748d215e-8358-4cb7-b61e-5c3e0b18d909.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 71,
+      "category": "vetements",
+      "name": "Tuniques 3 pièces",
+      "image": "images/56048f5a-bdb7-4891-b2c1-1ad1ebc18194.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 72,
+      "category": "vetements",
+      "name": "Tuniques 3 pièces",
+      "image": "images/f3fd56a2-9235-4cd4-ac4a-f7f48881b77b.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 73,
+      "category": "vetements",
+      "name": "Tuniques 3 pièces",
+      "image": "images/16feb98e-1576-42c9-9801-a9080a0e3506.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 74,
+      "category": "vetements",
+      "name": "Tuniques 3 pièces",
+      "image": "images/c4e2b7b7-3a70-4166-b980-50785566f2af.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 75,
+      "category": "vetements",
+      "name": "Tuniques 3 pièces",
+      "image": "images/712648f4-bbdd-4f33-81c2-9fe063c7b89d.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 76,
+      "category": "vetements",
+      "name": "Tunique 3 pièces",
+      "image": "images/04e4835f-a262-4da1-8de1-39274ff2c944.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 77,
+      "category": "vetements",
+      "name": "Tunique 3 pièces",
+      "image": "images/8ccc6f68-14f2-4d9f-9214-35dc8d5650f5.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 78,
+      "category": "vetements",
+      "name": "Tunique 3 pièces",
+      "image": "images/c5417784-e5c3-4e20-96ad-e9b2a77d0eb2.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 79,
+      "category": "vetements",
+      "name": "Tunique 3 pièces",
+      "image": "images/69e4755c-4653-4e39-a527-f17d4becc743.jpeg",
+      "price": 40000,
+      "oldPrice": 45000,
+      "isNew": true,
+      "isPromo": true,
+      "description": "Tunique homme coupe moderne, matière confortable et finition, soignée.\nParfait pour les sortie, les évènements ou les quotidien chic.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Plusieurs couleurs au choix"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 80,
+      "category": "vetements",
+      "name": "T-SHIRT LUFFY \"OVERSIZE\" ONE PIECE",
+      "image": "images/img_0570.jpeg",
+      "price": 12000,
+      "oldPrice": 13500,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le Corteiz Allstarz Tee Black est une pièce emblématique du streetwear contemporain, combinant minimalisme et identité forte de la marque. Conçu pour offrir un style urbain affirmé, ce t-shirt s'impose comme un essentiel dans toute garde-robe moderne.",
+      "colors": [
+        "#474747",
+        "#000000",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Gris",
+        "Noir",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 81,
+      "category": "vetements",
+      "name": "CORTEIZ ALLSTARZ TEE 'BLACK'",
+      "image": "images/img_0571.jpeg",
+      "price": 14500,
+      "oldPrice": 15000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le T-shirt Luffy Oversize One Piece est une pièce incontournable pour les passionnés d'animation japonaise et de streetwear moderne.\nInspiré du célèbre personnage Monkey D. Luffy, ce modèle associe parfaitement l'univers manga à la mode urbaine contemporaine.",
+      "colors": [
+        "#1a1a1a",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Noir",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 82,
+      "category": "vetements",
+      "name": "HELLSTAR t-shirt Saviors",
+      "image": "images/img_0572.jpeg",
+      "price": 14500,
+      "oldPrice": 15500,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le HELLSTAR T-shirt Saviors est une pièce incontournable pour les passionnés de streetwear premium et de mode urbaine contemporaine. Son design graphique distinctif associé à une coupe oversize offre un équilibre parfait entre confort, style et caractère.",
+      "colors": [
+        "#1a1a1a",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Noir",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 83,
+      "category": "vetements",
+      "name": "Chemise 100%coton",
+      "image": "images/img_0573.jpeg",
+      "price": 28000,
+      "oldPrice": 30000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Chemise en cotonChemise fabriquée en coton, offrant une bonne respirabilité et un confort naturel.\nCe matériau hypoallergénique permet une régulation efficace de l'humidité, adaptée aux usages quotidiens et professionnels. Durable, elle facilite une présentation soignée tout en assurant une aisance de mouvement.",
+      "colors": [
+        "#5e30eb",
+        "#982abc",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Bleue",
+        "Violet",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 84,
+      "category": "vetements",
+      "name": "Chemise en coton",
+      "image": "images/img_0574.jpeg",
+      "price": 25000,
+      "oldPrice": 28000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Chemise en linLa chemise en lin est conçue pour offrir une excellente respirabilité et un confort optimal. Fabriquée à partir de fibres naturelles, elle régule la température corporelle, ce qui la rend idéale pour les climats chauds. Son tissu hypoallergénique minimise les irritations cutanées, convenant ainsi à une utilisation prolongée.",
+      "colors": [
+        "#ffffff",
+        "#0056d6",
+        "#000000"
+      ],
+      "colorNames": [
+        "Blanc",
+        "Bleue",
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 85,
+      "category": "vetements",
+      "name": "Chemise Giant",
+      "image": "images/img_0575.jpeg",
+      "price": 25000,
+      "oldPrice": 28000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Chemise en cotonChemise fabriquée en coton, offrant une bonne respirabilité et un confort naturel.\nCe matériau hypoallergénique permet une régulation efficace de l'humidité, adaptée aux usages quotidiens et professionnels. Durable, elle facilite une présentation soignée tout en assurant une aisance de mouvement.",
+      "colors": [
+        "#0061fe",
+        "#000000",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Bleue",
+        "Noir",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 86,
+      "category": "vetements",
+      "name": "Chemise en coton",
+      "image": "images/img_0577.jpeg",
+      "price": 17000,
+      "oldPrice": 20000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Chemise en cotonChemise en coton offrant une régulation naturelle de l'humidité et une bonne respirabilité. Ce tissu garantit un confort optimal tout au long de la journée grâce à sa capacité à absorber jusqu'à 27 % de son poids en eau, limitant ainsi la transpiration.",
+      "colors": [
+        "#f7fadb"
+      ],
+      "colorNames": [
+        "Kaki militaire"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 87,
+      "category": "vetements",
+      "name": "Chemise en coton",
+      "image": "images/img_0578.jpeg",
+      "price": 17000,
+      "oldPrice": 19000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Chemise GiantLa chemise Giant offre une coupe adaptée pour un confort optimal tout au long de la journée. Conçue avec des matériaux durables, elle garantit une résistance accrue à l'usure et une facilité d'entretien. Son design simple facilite l'intégration dans diverses tenues professionnelles.",
+      "colors": [
+        "#74a7ff",
+        "#ffffff"
+      ],
+      "colorNames": [
+        "Bleue",
+        "Blanc"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 88,
+      "category": "chaussures",
+      "name": "Chaussure en cuir(marron foncé)",
+      "image": "images/img_0579.jpeg",
+      "price": 30000,
+      "oldPrice": 33000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Chaussure en cuirChaussure en cuir offrant durabilité et confort grâce à la résistance naturelle du matériau. Le cuir assure une bonne ventilation et une adaptation progressive à la forme du pied, favorisant un port prolongé sans inconfort.",
+      "colors": [
+        "#583300",
+        "#000000"
+      ],
+      "colorNames": [
+        "Marron",
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 89,
+      "category": "chaussures",
+      "name": "Berluti en cuir",
+      "image": "images/img_0580.jpeg",
+      "price": 35000,
+      "oldPrice": 40000,
+      "isNew": false,
+      "isPromo": true,
+      "description": "Berluti en cuirBerluti en cuir est conçu avec un cuir de haute qualité, offrant durabilité et résistance à l'usure. Ce matériau assure une longévité accrue et un entretien facilité, tout en conservant une apparence élégante et professionnelle.",
+      "colors": [
+        "#333333",
+        "#000000"
+      ],
+      "colorNames": [
+        "Gris",
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 90,
+      "category": "vetements",
+      "name": "BOTTEGA DESIRES SHORT EN JEAN NOIR À LOGO BRODÉ",
+      "image": "images/img_0546.jpeg",
+      "price": 14000,
+      "oldPrice": 16000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Apportez une touche audacieuse à vos looks streetwear avec ce short en jean Bottega Desires.\nConfectionné en denim noir délavé, il se dictingue par son style oversized et ses finitions\n• aux ourlets. Le logo \"Bottega Desires\" est\nMus en avant en grand sur l'avant et brodé discrètement au dos, affirmant un esprit urbain unique.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 91,
+      "category": "vetements",
+      "name": "FEAR OF GOD ESSENTIALS PULLOVER HOODIE OLIVE FOG",
+      "image": "images/img_0547.jpeg",
+      "price": 28000,
+      "oldPrice": 29000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le Fear of God Essentials Pullover Hoodie Olive\nFog est une pièce incontournable du streetwear moderne. Conçu avec une esthétique minimaliste et une coupe oversize, ce hoodie incarne parfaitement le style premium et urbain\n\"ché aujourd'hui. Sa teinte Olive Fog\nQ\nje une touche élégante et facile à associer à\nn'importe quelle tenue.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Vert militaire"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 92,
+      "category": "vetements",
+      "name": "ESSENTIALS FEAR OF GOD GRIS FONCÉ TRACKSUIT",
+      "image": "images/img_0548.jpeg",
+      "price": 40000,
+      "oldPrice": 43000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le Essentials Fear Of God Gris Foncé Tracksuit est un ensemble streetwear incontournable pour un look moderne, minimaliste et premium.\n• pour offrir un confort optimal tout en t tendance, cet ensemble gris foncé\ns'adapte parfaitement à un style urbain sophistiqué.",
+      "colors": [
+        "#858585"
+      ],
+      "colorNames": [
+        "Gris"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 93,
+      "category": "vetements",
+      "name": "MTVO LONG-SLEEVE T-SHIRT BLACK",
+      "image": "images/img_0550.jpeg",
+      "price": 15000,
+      "oldPrice": 17000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le MTVO Long-sleeve T-shirt Black est une pièce essentielle du streetwear moderne, idéale pour un look minimaliste et premium. Avec sa couleur noire intemporelle et sa coupe confortable, ce t-shirt à manches longues s'intègre parfaitement dans toutes les garde-robes urbaines.",
+      "colors": [
+        "#1a1a1a",
+        "#ffffff",
+        "#583300",
+        "#b51a00"
+      ],
+      "colorNames": [
+        "Noir",
+        "Blanc",
+        "Marron",
+        "Rouge"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 94,
+      "category": "vetements",
+      "name": "SP5DER Sp5der Punk V2 Hoodie 'Cyan' Le Sp5der Punk V2 Hoodie Cyan",
+      "image": "images/img_0551.jpeg",
+      "price": 28000,
+      "oldPrice": 30000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le Sp5der Punk V2 Hoodie Cyan est une pièce incontournable pour les amateurs de streetwear premium et de mode urbaine. Son coloris cyan vibrant, associé aux célèbres graphismes Sp5der, apporte une identité forte et moderne à votre tenue. Disponible chez Sneaker6ix Dakar, ce hoodie est pensé pour ceux qui recherchent un style audacieux inspiré de la scène hip-hop et des tendances internationales.\nGrâce à sa coupe confortable et son tissu épais de qualité supérieure, ce hoodie offre une excellente sensation au quotidien. Sa capuche ajustable, sa poche kangourou et ses finitions soignées en font une pièce aussi pratique qu'élégante.",
+      "colors": [
+        "#01c7fc"
+      ],
+      "colorNames": [
+        "Bleue"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 95,
+      "category": "vetements",
+      "name": "ADIDAS ADICOLOR FIRST BLACK DENIM TRACK TOP",
+      "image": "images/img_0553.jpeg",
+      "price": 32000,
+      "oldPrice": 35000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "La adidas Adicolor First Black Denim Track Top est une pièce iconique qui revisite le style streetwear avec une touche denim moderne.\nnée pour allier confort et esthétique, cette\nippée noire apporte une silhouette élegante tout en restant fidèle à l'ADN urbain.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 96,
+      "category": "vetements",
+      "name": "CURSE MARK VINTAGE OVERSIZE TEE",
+      "image": "images/img_0554.jpeg",
+      "price": 12000,
+      "oldPrice": 13500,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le Curse Mark Vintage Oversize Tee est un t-shirt streetwear au style vintage affirmé, conçu pour les amateurs de pièces uniques et tendances. Avec sa coupe oversize et son design graphique inspiré de l'univers underground, ce tee apporte une forte identité visuelle",
+      "colors": [
+        "#5c5c5c"
+      ],
+      "colorNames": [
+        "Gris"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 97,
+      "category": "vetements",
+      "name": "ADIDAS LOOSE DENIM PANTS (ASIA SIZING) MEDIUM BLACK DENIM",
+      "image": "images/img_0555.jpeg",
+      "price": 27000,
+      "oldPrice": 29000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le Adidas Loose Denim Pants Medium Black\nDenim est un pantalon en denim premium conçu pour les amateurs de mode urbaine et de streetwear contemporain. Grâce à sa coupe loose inspirée des tendances actuelles, ce modèle offre un confort exceptionnel tout au long de la journée tout en apportant une silhouette moderne et décontractée.",
+      "colors": [
+        "#1a1a1a"
+      ],
+      "colorNames": [
+        "Noir"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 98,
+      "category": "vetements",
+      "name": "SP5DER PUNK V2 SWEATPANT \"CYAN\"",
+      "image": "images/img_0556.jpeg",
+      "price": 25000,
+      "oldPrice": 28000,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Le Sp5der Punk V2 Sweatpant Cyan est un pantalon de jogging streetwear premium conçu pour les passionnés de mode urbaine. Avec son coloris cyan éclatant et ses célèbres graphismes\nSp5der, il apporte une touche moderne et audacieuse à toutes vos tenues. Disponible chez Sneaker6ix Dakar, ce sweatpant est idéal pour compléter un outfit tendance inspiré des plus grandes références du streetwear international.",
+      "colors": [
+        "#00a1d8"
+      ],
+      "colorNames": [
+        "Bleue"
+      ],
+      "sizes": []
+    },
+    {
+      "id": 99,
+      "category": "vetements",
+      "name": "GHOSTWOOD CAMO PANTS",
+      "image": "images/img_0557.jpeg",
+      "price": 16000,
+      "oldPrice": 17500,
+      "isNew": true,
+      "isPromo": false,
+      "description": "Ghostwood Camo Pants est un pantalon streetwear premium conçu pour les amateurs de mode urbaine. Son imprimé camouflage moderne, sa coupe confortable et ses finitions soignées en font une pièce incontournable pour compléter un look tendance. Disponible chez Sneaker6ix Dakar, ce pantalon s'associe facilement avec un hoodie, un t-shirt oversize ou une paire de sneakers afin de créer un style affirmé au quotidien.",
+      "colors": [
+        "#4f5504"
+      ],
+      "colorNames": [
+        "Vert militaire"
+      ],
+      "sizes": []
     }
   ]
 }
